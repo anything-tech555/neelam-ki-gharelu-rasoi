@@ -1,0 +1,995 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "name": "Neelam Sharma (Owner)",
+      "email": "admin@neelamrasoi.com",
+      "phone": "9997433379",
+      "role": "admin",
+      "addresses": [
+        {
+          "id": "addr-admin-1",
+          "tag": "Work",
+          "address": "P S 31, Panchsheel Apartment, Kanth Road, Moradabad",
+          "landmark": "Near Panchsheel Gate",
+          "isDefault": true
+        }
+      ],
+      "passwordHash": "$2a$10$IyzjefCGmfs.F1wGbSdttOYghnXpVccrN4.zD32LMU6Iv2Lh5CYtW",
+      "createdAt": "2026-11-22T18:31:50.734Z"
+    },
+    {
+      "id": "cust-001",
+      "name": "Rahul Verma",
+      "email": "rahul.verma@example.com",
+      "phone": "9876543210",
+      "role": "customer",
+      "addresses": [
+        {
+          "id": "addr-cust-1",
+          "tag": "Home",
+          "address": "Flat 402, Royal Enclave, Civil Lines, Moradabad",
+          "landmark": "Opposite District Hospital",
+          "isDefault": true
+        }
+      ],
+      "passwordHash": "$2a$10$IyzjefCGmfs.F1wGbSdttO2SCzKKb7ooVjlyqEbvlebXb1fkAs3zq",
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "user-e33c094e",
+      "name": "Aarav Gupta",
+      "email": "cust-1795373784210@example.com",
+      "phone": "9963736208",
+      "role": "customer",
+      "addresses": [
+        {
+          "id": "fcdba6f4-6b46-47ea-aa59-0e96f42a215d",
+          "tag": "Home",
+          "address": "B-12, Gandhi Nagar, Moradabad",
+          "landmark": "Near Water Tank",
+          "isDefault": true
+        }
+      ],
+      "passwordHash": "$2a$10$BhXv9zedsNmR8RzrVfarKe3iHtwdjEYl/rGuH02UXMHJ34KJkSCIm",
+      "createdAt": "2026-11-22T18:56:24.287Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-breakfast",
+      "name": "Breakfast",
+      "hindiName": "नाश्ता",
+      "description": "Freshly prepared morning delicacies with pure desi ghee",
+      "icon": "Sun",
+      "displayOrder": 1,
+      "isActive": true
+    },
+    {
+      "id": "cat-lunch",
+      "name": "Lunch",
+      "hindiName": "दोपहर का भोजन",
+      "description": "Hearty North Indian lunch combos, dal and rice bowls",
+      "icon": "Utensils",
+      "displayOrder": 2,
+      "isActive": true
+    },
+    {
+      "id": "cat-dinner",
+      "name": "Dinner",
+      "hindiName": "रात का खाना",
+      "description": "Light and wholesome dinner curries, rotis, and sabzi",
+      "icon": "Moon",
+      "displayOrder": 3,
+      "isActive": true
+    },
+    {
+      "id": "cat-thali",
+      "name": "Special Thali",
+      "hindiName": "विशेष थाली",
+      "description": "Complete grand meal with dal, paneer, rotis, rice, raita & dessert",
+      "icon": "Award",
+      "displayOrder": 4,
+      "isActive": true
+    },
+    {
+      "id": "cat-snacks",
+      "name": "Evening Snacks",
+      "hindiName": "शाम का नाश्ता",
+      "description": "Crispy pakodas, samosas, chillas, and tea companions",
+      "icon": "Coffee",
+      "displayOrder": 5,
+      "isActive": true
+    },
+    {
+      "id": "cat-special",
+      "name": "Today’s Special",
+      "hindiName": "आज का विशेष",
+      "description": "Neelam Ji’s handpicked special recipes of the day",
+      "icon": "Sparkles",
+      "displayOrder": 6,
+      "isActive": true
+    },
+    {
+      "id": "cat-beverages",
+      "name": "Beverages",
+      "hindiName": "पेय पदार्थ",
+      "description": "Chilled lassi, masala chaas, and hot kulhad chai",
+      "icon": "GlassWater",
+      "displayOrder": 7,
+      "isActive": true
+    }
+  ],
+  "foodItems": [
+    {
+      "id": "food-001",
+      "name": "Poha with Jalebi",
+      "hindiName": "पोहा और गरमा-गरम जलेबी",
+      "description": "Soft Indori-style poha garnished with crunchy sev, fresh coriander, pomegranate, served with 2 crispy hot jalebis.",
+      "hindiDescription": "मुलायम इंदौरी पोहा सेव और नींबू के साथ, साथ में 2 कुरकुरी गर्म जलेबी।",
+      "price": 70,
+      "discountPrice": 65,
+      "categoryId": "cat-breakfast",
+      "categoryName": "Breakfast",
+      "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 15,
+      "rating": 4.8,
+      "ratingCount": 124,
+      "displayOrder": 1,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-002",
+      "name": "Aloo Paratha with Makhan & Curd",
+      "hindiName": "आलू पराठा मक्खन और दही के साथ",
+      "description": "Two large golden stuffed whole wheat parathas with spiced potato filling, topped with white butter, fresh curd and pickle.",
+      "hindiDescription": "2 कुरकुरे आलू पराठे, सफेद मक्खन, ताजा दही और घर का बना आम का अचार।",
+      "price": 90,
+      "categoryId": "cat-breakfast",
+      "categoryName": "Breakfast",
+      "imageUrl": "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": false,
+      "prepTimeMinutes": 20,
+      "rating": 4.9,
+      "ratingCount": 198,
+      "displayOrder": 2,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-003",
+      "name": "Idli Sambar Combo",
+      "hindiName": "इडली सांभर और नारियल चटनी",
+      "description": "3 pieces of pillowy soft steamed rice-lentil idlis, served with aromatic vegetable sambar and fresh coconut chutney.",
+      "hindiDescription": "3 रुई जैसी मुलायम इडली, खुशबूदार सब्जियों वाला सांभर और ताज़ा नारियल चटनी।",
+      "price": 70,
+      "categoryId": "cat-breakfast",
+      "categoryName": "Breakfast",
+      "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 15,
+      "rating": 4.7,
+      "ratingCount": 86,
+      "displayOrder": 3,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-004",
+      "name": "Crispy Bedmi Puri with Aloo Sabzi",
+      "hindiName": "बेड़मी पूरी और हलवाई स्टाइल आलू की सब्जी",
+      "description": "4 crispy urad dal stuffed bedmi puris served with Moradabad-special spicy tangy aloo jhol and methi chutney.",
+      "hindiDescription": "4 दाल भरी खस्ता बेड़मी पूरी, तरीदार चटपटे आलू और मेथी की लौंजी।",
+      "price": 80,
+      "categoryId": "cat-breakfast",
+      "categoryName": "Breakfast",
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 20,
+      "rating": 4.9,
+      "ratingCount": 210,
+      "displayOrder": 4,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-005",
+      "name": "Besan Chilla with Mint Chutney",
+      "hindiName": "बेसन का चीला पुदीना चटनी के साथ",
+      "description": "2 nutritious gram flour pancakes loaded with finely chopped onions, tomatoes, and paneer, served with mint coriander dip.",
+      "hindiDescription": "2 कुरकुरे बेसन के चीले प्याज, टमाटर और पनीर से भरपूर, हरी चटनी के साथ।",
+      "price": 70,
+      "categoryId": "cat-breakfast",
+      "categoryName": "Breakfast",
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 15,
+      "rating": 4.6,
+      "ratingCount": 65,
+      "displayOrder": 5,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-006",
+      "name": "Ghar Ka Rajma Chawal",
+      "hindiName": "घर जैसा स्वादिष्ट राजमा चावल",
+      "description": "Slow-simmered Kashmiri rajma cooked with homemade tomato puree and roasted cumin, served over fragrant basmati rice.",
+      "hindiDescription": "धीमी आंच पर पका कश्मीरी राजमा, खुशबूदार बासमती चावल, सिरका प्याज और हरी मिर्च।",
+      "price": 110,
+      "discountPrice": 99,
+      "categoryId": "cat-lunch",
+      "categoryName": "Lunch",
+      "imageUrl": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 20,
+      "rating": 4.9,
+      "ratingCount": 340,
+      "displayOrder": 6,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-007",
+      "name": "Dal Tadka Combo Thali",
+      "hindiName": "दाल तड़का कम्प्लीट मील",
+      "description": "Yellow arhar dal with double garlic tadka, steamed basmati rice, seasonal dry vegetable, 2 soft rotis and fresh salad.",
+      "hindiDescription": "देसी घी तड़का अरहर दाल, जीरा राइस, मौसमी सब्जी, 2 तवा रोटी और सलाद।",
+      "price": 120,
+      "categoryId": "cat-lunch",
+      "categoryName": "Lunch",
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 25,
+      "rating": 4.8,
+      "ratingCount": 150,
+      "displayOrder": 7,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-008",
+      "name": "Royal Shahi Paneer Thali",
+      "hindiName": "शाही पनीर डीलक्स थाली",
+      "description": "Rich Shahi Paneer in cashew gravy, Dal Makhani, Jeera Rice, 3 Butter Rotis, Boondi Raita, Gulab Jamun, and Pickle.",
+      "hindiDescription": "शाही पनीर, दाल मखनी, जीरा राइस, 3 बटर रोटी, बूंदी रायता, 1 गुलाब जामुन और सलाद।",
+      "price": 160,
+      "discountPrice": 149,
+      "categoryId": "cat-thali",
+      "categoryName": "Special Thali",
+      "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=1200&q=80",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1606471191009-63994c53433b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 25,
+      "rating": 5,
+      "ratingCount": 420,
+      "displayOrder": 8,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-009",
+      "name": "Pakoda Kadhi with Jeera Rice",
+      "hindiName": "कढ़ी पकौड़ा और जीरा राइस",
+      "description": "Traditional spiced buttermilk kadhi with melt-in-mouth besan pakodas, tempered with mustard seeds and curry leaves.",
+      "hindiDescription": "पारंपरिक खट्टी-मीठी कढ़ी, नरम बेसन पकौड़े, राई-कढ़ी पत्ता तड़का और जीरा राइस।",
+      "price": 100,
+      "categoryId": "cat-lunch",
+      "categoryName": "Lunch",
+      "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 20,
+      "rating": 4.7,
+      "ratingCount": 95,
+      "displayOrder": 9,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-010",
+      "name": "Amritsari Chole Chawal",
+      "hindiName": "अमृतसरी छोले चावल",
+      "description": "Authentic dark spiced chickpeas cooked with tea leaf infusion and anardana, served with fluffy jeera rice and spiced onions.",
+      "hindiDescription": "अमृतसरी काले छोले, अनारदाना और खड़े मसालों का स्वाद, साथ में बासमती चावल।",
+      "price": 110,
+      "categoryId": "cat-lunch",
+      "categoryName": "Lunch",
+      "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+      "galleryImages": [
+        "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 20,
+      "rating": 4.8,
+      "ratingCount": 160,
+      "displayOrder": 10,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-011",
+      "name": "Matar Paneer with Tawa Roti",
+      "hindiName": "मटर पनीर और 4 तवा रोटी",
+      "description": "Fresh cottage cheese cubes and sweet green peas in a rich onion-tomato gravy, served with 4 ghee-brushed phulkas.",
+      "hindiDescription": "नरम पनीर और ताज़ी हरी मटर की मसालेदार सब्जी, 4 घी लगी गरमा-गरम फुल्का रोटी।",
+      "price": 130,
+      "categoryId": "cat-dinner",
+      "categoryName": "Dinner",
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": false,
+      "prepTimeMinutes": 25,
+      "rating": 4.8,
+      "ratingCount": 110,
+      "displayOrder": 11,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-012",
+      "name": "Moradabadi Moong Dal Chaat",
+      "hindiName": "प्रसिद्ध मुरादाबादी मूंग दाल चाट",
+      "description": "World-famous Moradabad street special: slow-cooked yellow moong dal topped with butter, heeng-jeera, green chilies, and crispy jalebi/crackers.",
+      "hindiDescription": "मुरादाबाद की मशहूर गरमा-गरम मूंग दाल चाट, मक्खन, भुना हींग-जीरा और चटपटी चटनी के साथ।",
+      "price": 60,
+      "discountPrice": 50,
+      "categoryId": "cat-snacks",
+      "categoryName": "Evening Snacks",
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 10,
+      "rating": 5,
+      "ratingCount": 512,
+      "displayOrder": 12,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-013",
+      "name": "Thandi Kesariya Sweet Lassi",
+      "hindiName": "ठंडी केसरिया मलाई लस्सी",
+      "description": "Thick, creamy churned yogurt sweetened and topped with saffron strands, crushed pistachios, and thick malai layer.",
+      "hindiDescription": "गाढ़े ताज़े दही से बनी मलाईदार लस्सी, केसर और पिस्ता की सजावट के साथ।",
+      "price": 50,
+      "categoryId": "cat-beverages",
+      "categoryName": "Beverages",
+      "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 5,
+      "rating": 4.9,
+      "ratingCount": 180,
+      "displayOrder": 13,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-014",
+      "name": "Adrak Elaichi Kulhad Chai (2 Cups)",
+      "hindiName": "अदरक इलायची कुल्हड़ चाय (2 कप)",
+      "description": "Freshly brewed aromatic tea boiled with crushed ginger and green cardamom, served hot in earthen clay kulhads.",
+      "hindiDescription": "ताजा कुटी अदरक और इलायची वाली कड़क चाय, 2 कुल्हड़ के साथ।",
+      "price": 40,
+      "categoryId": "cat-beverages",
+      "categoryName": "Beverages",
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isSpecial": false,
+      "prepTimeMinutes": 10,
+      "rating": 4.9,
+      "ratingCount": 290,
+      "displayOrder": 14,
+      "createdAt": "2026-11-22T18:31:50.735Z"
+    },
+    {
+      "id": "food-4a321a8d",
+      "name": "Kesari Dal Baati Churma",
+      "hindiName": "केसरी दाल बाटी चूरमा",
+      "description": "Traditional Rajasthani pure desi ghee baatis served with spicy panchmel dal and churma.",
+      "price": 180,
+      "discountPrice": 165,
+      "categoryId": "cat-thali",
+      "categoryName": "Special Thali",
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "isVeg": true,
+      "isAvailable": true,
+      "isFeatured": true,
+      "isSpecial": true,
+      "prepTimeMinutes": 25,
+      "rating": 5,
+      "ratingCount": 2,
+      "displayOrder": 50,
+      "createdAt": "2026-11-22T18:56:24.314Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "orderNumber": "NKG-2026-6653",
+      "customerId": "guest-e45e8b",
+      "customerName": "Ravi Kumar",
+      "customerPhone": "9876543210",
+      "deliveryAddress": {
+        "address": "Shop 12, Delhi Road, Majhola",
+        "landmark": "Opposite Petrol Pump",
+        "distanceKm": 7.5,
+        "areaName": "Above 5 km (Rs 30 Fee)"
+      },
+      "items": [
+        {
+          "foodItemId": "food-001",
+          "name": "Poha with Jalebi",
+          "hindiName": "पोहा और गरमा-गरम जलेबी",
+          "price": 65,
+          "quantity": 1,
+          "itemTotal": 65,
+          "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80"
+        }
+      ],
+      "subtotal": 65,
+      "deliveryCharge": 30,
+      "discountAmount": 0,
+      "totalAmount": 95,
+      "paymentMethod": "COD",
+      "paymentStatus": "COMPLETED",
+      "status": "DELIVERED",
+      "statusTimeline": [
+        {
+          "status": "ORDER_PLACED",
+          "timestamp": "2026-11-22T19:25:45.845Z",
+          "note": "Order successfully placed by customer."
+        },
+        {
+          "status": "ORDER_CONFIRMED",
+          "timestamp": "2026-11-23T04:24:57.400Z",
+          "note": "Kitchen accepted order."
+        },
+        {
+          "status": "PREPARATION_STARTED",
+          "timestamp": "2026-11-23T04:24:59.098Z",
+          "note": "Cooking started in kitchen."
+        },
+        {
+          "status": "BEING_PREPARED",
+          "timestamp": "2026-11-23T04:25:01.209Z",
+          "note": "Fresh food simmering."
+        },
+        {
+          "status": "FOOD_READY",
+          "timestamp": "2026-11-23T04:25:02.035Z",
+          "note": "Packed in thermal container."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-23T04:25:02.910Z",
+          "note": "Delivery agent departed."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-23T04:25:03.691Z",
+          "note": "Delivered safely to customer."
+        }
+      ],
+      "prepTimeEstimatedMinutes": 20,
+      "deliveryTimeEstimatedMinutes": 25,
+      "estimatedDeliveryTime": "2026-11-22T20:10:45.845Z",
+      "createdAt": "2026-11-22T19:25:45.845Z",
+      "updatedAt": "2026-11-23T04:25:03.691Z",
+      "actualPreparationCompletedAt": "2026-11-23T04:25:02.035Z",
+      "deliveryDepartureAt": "2026-11-23T04:25:02.910Z",
+      "deliveredAt": "2026-11-23T04:25:03.691Z"
+    },
+    {
+      "id": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "orderNumber": "NKG-2026-9167",
+      "customerId": "guest-a7253e",
+      "customerName": "Akshat Goyal",
+      "customerPhone": "9876543210",
+      "deliveryAddress": {
+        "address": "Flat 101, Panchsheel Enclave, Kanth Road",
+        "landmark": "Near Gate 1",
+        "distanceKm": 3.5,
+        "areaName": "Within 5 km (Free Delivery)"
+      },
+      "items": [
+        {
+          "foodItemId": "food-001",
+          "name": "Poha with Jalebi",
+          "hindiName": "पोहा और गरमा-गरम जलेबी",
+          "price": 65,
+          "quantity": 1,
+          "itemTotal": 65,
+          "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80"
+        }
+      ],
+      "subtotal": 65,
+      "deliveryCharge": 0,
+      "discountAmount": 0,
+      "totalAmount": 65,
+      "paymentMethod": "COD",
+      "paymentStatus": "COMPLETED",
+      "status": "DELIVERED",
+      "statusTimeline": [
+        {
+          "status": "ORDER_PLACED",
+          "timestamp": "2026-11-22T19:25:45.818Z",
+          "note": "Order successfully placed by customer."
+        },
+        {
+          "status": "ORDER_CONFIRMED",
+          "timestamp": "2026-11-23T04:25:17.630Z",
+          "note": "Kitchen accepted order."
+        },
+        {
+          "status": "PREPARATION_STARTED",
+          "timestamp": "2026-11-23T04:25:18.048Z",
+          "note": "Cooking started in kitchen."
+        },
+        {
+          "status": "BEING_PREPARED",
+          "timestamp": "2026-11-23T04:25:18.557Z",
+          "note": "Fresh food simmering."
+        },
+        {
+          "status": "FOOD_READY",
+          "timestamp": "2026-11-23T04:25:18.982Z",
+          "note": "Packed in thermal container."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-23T04:25:19.736Z",
+          "note": "Delivery agent departed."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-23T04:25:31.314Z",
+          "note": "Delivered safely to customer."
+        }
+      ],
+      "prepTimeEstimatedMinutes": 20,
+      "deliveryTimeEstimatedMinutes": 25,
+      "estimatedDeliveryTime": "2026-11-22T20:10:45.818Z",
+      "createdAt": "2026-11-22T19:25:45.818Z",
+      "updatedAt": "2026-11-23T04:25:31.314Z",
+      "actualPreparationCompletedAt": "2026-11-23T04:25:18.982Z",
+      "deliveryDepartureAt": "2026-11-23T04:25:19.736Z",
+      "deliveredAt": "2026-11-23T04:25:31.314Z"
+    },
+    {
+      "id": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "orderNumber": "NKG-2026-1662",
+      "customerId": "user-e33c094e",
+      "customerName": "Aarav Gupta",
+      "customerPhone": "9963736208",
+      "deliveryAddress": {
+        "address": "B-12, Gandhi Nagar, Moradabad",
+        "landmark": "Near Water Tank",
+        "deliveryInstructions": "Piping hot please"
+      },
+      "items": [
+        {
+          "foodItemId": "food-4a321a8d",
+          "name": "Kesari Dal Baati Churma",
+          "hindiName": "केसरी दाल बाटी चूरमा",
+          "price": 165,
+          "quantity": 2,
+          "itemTotal": 330,
+          "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80"
+        }
+      ],
+      "subtotal": 330,
+      "deliveryCharge": 0,
+      "discountAmount": 100,
+      "couponCode": "SWAGAT50",
+      "totalAmount": 230,
+      "paymentMethod": "COD",
+      "paymentStatus": "COMPLETED",
+      "status": "DELIVERED",
+      "statusTimeline": [
+        {
+          "status": "ORDER_PLACED",
+          "timestamp": "2026-11-22T18:56:24.353Z",
+          "note": "Order successfully placed by customer."
+        },
+        {
+          "status": "ORDER_CONFIRMED",
+          "timestamp": "2026-11-22T18:56:24.376Z",
+          "note": "Automated test transition to ORDER_CONFIRMED"
+        },
+        {
+          "status": "PREPARATION_STARTED",
+          "timestamp": "2026-11-22T18:56:24.389Z",
+          "note": "Automated test transition to PREPARATION_STARTED"
+        },
+        {
+          "status": "BEING_PREPARED",
+          "timestamp": "2026-11-22T18:56:24.401Z",
+          "note": "Automated test transition to BEING_PREPARED"
+        },
+        {
+          "status": "FOOD_READY",
+          "timestamp": "2026-11-22T18:56:24.409Z",
+          "note": "Automated test transition to FOOD_READY"
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-22T18:56:24.421Z",
+          "note": "Automated test transition to OUT_FOR_DELIVERY"
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-22T18:56:24.432Z",
+          "note": "Automated test transition to DELIVERED"
+        }
+      ],
+      "prepTimeEstimatedMinutes": 25,
+      "deliveryTimeEstimatedMinutes": 30,
+      "estimatedDeliveryTime": "2026-11-22T19:51:24.353Z",
+      "createdAt": "2026-11-22T18:56:24.353Z",
+      "updatedAt": "2026-11-22T18:56:24.432Z",
+      "actualPreparationCompletedAt": "2026-11-22T18:56:24.409Z",
+      "deliveryDepartureAt": "2026-11-22T18:56:24.421Z",
+      "deliveredAt": "2026-11-22T18:56:24.432Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-8536533e",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "customerId": "user-e33c094e",
+      "customerName": "Aarav Gupta",
+      "rating": 5,
+      "comment": "Outstanding homemade flavour! Desi ghee fragrance was amazing.",
+      "isApproved": true,
+      "createdAt": "2026-11-22T18:56:24.443Z",
+      "adminReply": "Dhanyavaad Aarav ji! We are delighted you enjoyed our food.",
+      "adminReplyAt": "2026-11-22T18:56:24.454Z"
+    },
+    {
+      "id": "rev-001",
+      "orderId": "NKG-2026-1001",
+      "customerId": "cust-001",
+      "customerName": "Rahul Verma",
+      "rating": 5,
+      "comment": "Pure homemade taste! The Shahi Paneer Thali tasted just like home cooked food. Packing was clean and warm.",
+      "adminReply": "Thank you Rahul ji! We strive to deliver the cleanest homemade food in Moradabad.",
+      "adminReplyAt": "2026-11-21T18:31:50.736Z",
+      "isApproved": true,
+      "createdAt": "2026-11-20T18:31:50.736Z"
+    },
+    {
+      "id": "rev-002",
+      "orderId": "NKG-2026-1002",
+      "customerId": "cust-002",
+      "customerName": "Priya Agarwal",
+      "rating": 5,
+      "comment": "Bedmi Puri and Aloo Sabzi reminded me of Sunday mornings! Delicious and not overly oily. 10/10.",
+      "isApproved": true,
+      "createdAt": "2026-11-22T06:31:50.736Z"
+    }
+  ],
+  "coupons": [],
+  "notifications": [
+    {
+      "id": "notif-18a5fc7d",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Delivered",
+      "hindiTitle": "ऑर्डर अपडेट: सफलतापूर्वक डिलीवर हुआ",
+      "message": "Your order #NKG-2026-9167 is now delivered.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 सफलतापूर्वक डिलीवर हुआ।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:31.314Z"
+    },
+    {
+      "id": "notif-fb2fb712",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Out for Delivery",
+      "hindiTitle": "ऑर्डर अपडेट: डिलीवरी के लिए रवाना",
+      "message": "Your order #NKG-2026-9167 is now out for delivery.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 डिलीवरी के लिए रवाना।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:19.736Z"
+    },
+    {
+      "id": "notif-b01e5600",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Food Ready",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार है",
+      "message": "Your order #NKG-2026-9167 is now food ready.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 खाना तैयार है।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:18.982Z"
+    },
+    {
+      "id": "notif-3ab416b4",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Food Being Prepared",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार हो रहा है",
+      "message": "Your order #NKG-2026-9167 is now food being prepared.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 खाना तैयार हो रहा है।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:18.557Z"
+    },
+    {
+      "id": "notif-30624dbd",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Food Preparation Started",
+      "hindiTitle": "ऑर्डर अपडेट: खाना बनना शुरू हुआ",
+      "message": "Your order #NKG-2026-9167 is now food preparation started.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 खाना बनना शुरू हुआ।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:18.048Z"
+    },
+    {
+      "id": "notif-df1f3b0f",
+      "recipientId": "guest-a7253e",
+      "title": "Order Update: Order Confirmed",
+      "hindiTitle": "ऑर्डर अपडेट: ऑर्डर कन्फर्म हुआ",
+      "message": "Your order #NKG-2026-9167 is now order confirmed.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-9167 ऑर्डर कन्फर्म हुआ।",
+      "type": "status",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:17.630Z"
+    },
+    {
+      "id": "notif-63da4479",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Delivered",
+      "hindiTitle": "ऑर्डर अपडेट: सफलतापूर्वक डिलीवर हुआ",
+      "message": "Your order #NKG-2026-6653 is now delivered.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 सफलतापूर्वक डिलीवर हुआ।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:03.691Z"
+    },
+    {
+      "id": "notif-c7d7a9f4",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Out for Delivery",
+      "hindiTitle": "ऑर्डर अपडेट: डिलीवरी के लिए रवाना",
+      "message": "Your order #NKG-2026-6653 is now out for delivery.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 डिलीवरी के लिए रवाना।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:02.910Z"
+    },
+    {
+      "id": "notif-af73ce57",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Food Ready",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार है",
+      "message": "Your order #NKG-2026-6653 is now food ready.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 खाना तैयार है।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:02.035Z"
+    },
+    {
+      "id": "notif-c5d110fd",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Food Being Prepared",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार हो रहा है",
+      "message": "Your order #NKG-2026-6653 is now food being prepared.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 खाना तैयार हो रहा है।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:25:01.209Z"
+    },
+    {
+      "id": "notif-05cab86a",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Food Preparation Started",
+      "hindiTitle": "ऑर्डर अपडेट: खाना बनना शुरू हुआ",
+      "message": "Your order #NKG-2026-6653 is now food preparation started.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 खाना बनना शुरू हुआ।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:24:59.098Z"
+    },
+    {
+      "id": "notif-bc9b4f85",
+      "recipientId": "guest-e45e8b",
+      "title": "Order Update: Order Confirmed",
+      "hindiTitle": "ऑर्डर अपडेट: ऑर्डर कन्फर्म हुआ",
+      "message": "Your order #NKG-2026-6653 is now order confirmed.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-6653 ऑर्डर कन्फर्म हुआ।",
+      "type": "status",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-23T04:24:57.400Z"
+    },
+    {
+      "id": "notif-9810fb55",
+      "recipientId": "admin",
+      "title": "New Order: NKG-2026-6653",
+      "hindiTitle": "नया ऑर्डर: NKG-2026-6653",
+      "message": "Ravi Kumar ordered 1 items (₹95) via COD.",
+      "hindiMessage": "Ravi Kumar ने ₹95 का ऑर्डर दिया (COD)।",
+      "type": "order",
+      "orderId": "ord-f3a5d0d7-a317-4162-8d47-d55fbd030880",
+      "isRead": false,
+      "createdAt": "2026-11-22T19:25:45.845Z"
+    },
+    {
+      "id": "notif-7a5c93ad",
+      "recipientId": "admin",
+      "title": "New Order: NKG-2026-9167",
+      "hindiTitle": "नया ऑर्डर: NKG-2026-9167",
+      "message": "Akshat Goyal ordered 1 items (₹65) via COD.",
+      "hindiMessage": "Akshat Goyal ने ₹65 का ऑर्डर दिया (COD)।",
+      "type": "order",
+      "orderId": "ord-4730d83e-884e-4e3f-b853-51c762fe0081",
+      "isRead": false,
+      "createdAt": "2026-11-22T19:25:45.818Z"
+    },
+    {
+      "id": "notif-2d8a28a2",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Delivered",
+      "hindiTitle": "ऑर्डर अपडेट: सफलतापूर्वक डिलीवर हुआ",
+      "message": "Your order #NKG-2026-1662 is now delivered.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 सफलतापूर्वक डिलीवर हुआ।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.432Z"
+    },
+    {
+      "id": "notif-55d29019",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Out for Delivery",
+      "hindiTitle": "ऑर्डर अपडेट: डिलीवरी के लिए रवाना",
+      "message": "Your order #NKG-2026-1662 is now out for delivery.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 डिलीवरी के लिए रवाना।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.421Z"
+    },
+    {
+      "id": "notif-fab2bdb4",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Food Ready",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार है",
+      "message": "Your order #NKG-2026-1662 is now food ready.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 खाना तैयार है।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.409Z"
+    },
+    {
+      "id": "notif-12f61e84",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Food Being Prepared",
+      "hindiTitle": "ऑर्डर अपडेट: खाना तैयार हो रहा है",
+      "message": "Your order #NKG-2026-1662 is now food being prepared.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 खाना तैयार हो रहा है।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.401Z"
+    },
+    {
+      "id": "notif-7c616534",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Food Preparation Started",
+      "hindiTitle": "ऑर्डर अपडेट: खाना बनना शुरू हुआ",
+      "message": "Your order #NKG-2026-1662 is now food preparation started.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 खाना बनना शुरू हुआ।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.389Z"
+    },
+    {
+      "id": "notif-5ec895d5",
+      "recipientId": "user-e33c094e",
+      "title": "Order Update: Order Confirmed",
+      "hindiTitle": "ऑर्डर अपडेट: ऑर्डर कन्फर्म हुआ",
+      "message": "Your order #NKG-2026-1662 is now order confirmed.",
+      "hindiMessage": "आपका ऑर्डर #NKG-2026-1662 ऑर्डर कन्फर्म हुआ।",
+      "type": "status",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.376Z"
+    },
+    {
+      "id": "notif-e3525dd4",
+      "recipientId": "admin",
+      "title": "New Order: NKG-2026-1662",
+      "hindiTitle": "नया ऑर्डर: NKG-2026-1662",
+      "message": "Aarav Gupta ordered 1 items (₹230) via COD.",
+      "hindiMessage": "Aarav Gupta ने ₹230 का ऑर्डर दिया (COD)।",
+      "type": "order",
+      "orderId": "ord-78ff3b99-4295-401d-bdfa-991dd664e802",
+      "isRead": false,
+      "createdAt": "2026-11-22T18:56:24.353Z"
+    }
+  ],
+  "settings": {
+    "businessName": "Neelam Ki Gharelu Rasoi",
+    "hindiName": "नीलम की घरेलू रसोई",
+    "tagline": "शुद्ध शाकाहारी भोजन",
+    "category": "Pure Vegetarian Homemade Food",
+    "location": "Moradabad, Uttar Pradesh, India",
+    "address": "P S 31, Panchsheel Apartment, Kanth Road, Moradabad",
+    "phone": "9997433379",
+    "secondaryPhone": "8272072057",
+    "currency": "INR",
+    "isOpen": true,
+    "isPaused": true,
+    "pauseMessage": "",
+    "openingTime": "08:00",
+    "closingTime": "22:00",
+    "defaultPrepTimeMinutes": 20,
+    "defaultDeliveryTimeMinutes": 25,
+    "deliveryCharge": 30,
+    "freeDeliveryThreshold": 299,
+    "minOrderAmount": 50,
+    "freeDeliveryRadiusKm": 5,
+    "deliveryChargeAboveRadius": 30,
+    "announcementBanner": "Shuddh Shakahari Homemade Food freshly cooked in Moradabad. FREE delivery within 5 km for all orders (even under ₹100, like ₹65 or ₹70)! Above 5 km: ₹30."
+  }
+}

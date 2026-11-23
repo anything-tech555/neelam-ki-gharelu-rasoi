@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production build outputs (built dynamically by GitHub Actions / deployments)
+dist/
+*/dist/
+
+# Android Build Outputs & Caches
+*.apk
+*.aab
+.gradle/
+*/.gradle/
+*/*/.gradle/
+build/
+*/build/
+*/*/build/
+local.properties
+*/local.properties
+*/*/local.properties
+.cxx/
+*/.cxx/
+*/*/.cxx/
+
+# Environment and secrets
+.env
+.env.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.system_generated/
+temp_repo/
+
+# Antigravity artifacts
+.gemini/

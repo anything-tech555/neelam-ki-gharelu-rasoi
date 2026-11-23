@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Offline – Neelam Ki Gharelu Rasoi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #F7F9F3;
+      color: #1d2a22;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #ffffff;
+      padding: 32px 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(31, 77, 58, 0.08);
+      max-width: 420px;
+      width: 100%;
+      border: 1px solid #dce3d6;
+    }
+    .pot-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: #EBF3EE;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 22px;
+      color: #1F4D3A;
+      margin: 0 0 4px;
+      font-weight: 800;
+    }
+    .hindi {
+      color: #F2B01E;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 0 0 16px;
+    }
+    p {
+      color: #5d6b62;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 24px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      background: #1F4D3A;
+      color: #ffffff;
+      padding: 13px;
+      border-radius: 12px;
+      border: 0;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    .btn-outline {
+      background: transparent;
+      color: #1F4D3A;
+      border: 2px solid #1F4D3A;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #2e7d4f;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="pot-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1F4D3A" stroke-width="2">
+        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        <line x1="2" y1="2" x2="22" y2="22" stroke="#C8372D"></line>
+      </svg>
+    </div>
+    <h1>You are currently offline</h1>
+    <div class="hindi">इंटरनेट कनेक्शन उपलब्ध नहीं है</div>
+    <p>Please check your mobile data or Wi-Fi connection to continue browsing fresh homemade dishes.</p>
+    <button class="btn" onclick="window.location.reload()">Retry Connection</button>
+    <a href="tel:9997433379" class="btn btn-outline">Call Restaurant: 9997433379</a>
+    <div class="badge">Neelam Ki Gharelu Rasoi • Moradabad</div>
+  </div>
+</body>
+</html>

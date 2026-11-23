@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Neelam Ki Gharelu Rasoi</string>
+    <string name="title_activity_main">Neelam Ki Gharelu Rasoi</string>
+    <string name="package_name">com.neelam.rasoi</string>
+    <string name="custom_url_scheme">com.neelam.rasoi</string>
+</resources>

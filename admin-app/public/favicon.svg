@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#1F4D3A" stroke="#F2B01E" stroke-width="4"/>
+  <!-- Admin gear & chef hat -->
+  <path d="M30 48 C30 65, 70 65, 70 48 Z" fill="#F2B01E"/>
+  <circle cx="50" cy="35" r="14" fill="#FFF"/>
+  <circle cx="38" cy="38" r="10" fill="#FFF"/>
+  <circle cx="62" cy="38" r="10" fill="#FFF"/>
+  <rect x="30" y="44" width="40" height="5" fill="#5ac28a"/>
+</svg>
