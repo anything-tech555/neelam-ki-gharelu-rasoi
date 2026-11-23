@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#1F4D3A" stroke="#F2B01E" stroke-width="4"/>
+  <!-- Steaming Pot / Kadai Design -->
+  <path d="M25 45 C25 72, 75 72, 75 45 Z" fill="#F2B01E"/>
+  <rect x="20" y="42" width="60" height="6" rx="3" fill="#FFF"/>
+  <!-- Fresh Leaf Emblem for Pure Veg -->
+  <path d="M50 22 C42 30, 42 38, 50 42 C58 38, 58 30, 50 22 Z" fill="#5ac28a"/>
+  <!-- Steam lines -->
+  <path d="M38 36 C35 30, 40 26, 37 20" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M62 36 C59 30, 64 26, 61 20" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <circle cx="50" cy="80" r="4" fill="#5ac28a"/>
+</svg>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1F4D3A" />
+    <script>
+      // Immediate routing guard: if opened under /admin, redirect immediately to admin dashboard
+      if (window.location.pathname.toLowerCase().includes('/admin')) {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            for (var i = 0; i < regs.length; i++) regs[i].unregister();
+          });
+        }
+        var targetAdmin = window.location.origin + '/neelam-ki-gharelu-rasoi/admin/index.html';
+        if (window.location.href !== targetAdmin) {
+          window.location.replace(targetAdmin);
+        }
+      }
+    </script>
+    <meta name="description" content="Neelam Ki Gharelu Rasoi - Ghar jaisa shuddh shakahari khana in Moradabad, UP. Order fresh homemade breakfast, thalis, lunch and snacks." />
+    <title>Neelam Ki Gharelu Rasoi | नीलम की घरेलू रसोई</title>
+    <!-- Google Fonts for authentic Indian culinary aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Razorpay Standard Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="module" crossorigin src="./assets/index-DL24zq-X.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DoICxtBl.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
+  <body class="bg-rasoi-cream text-[#1d2a22] font-body antialiased selection:bg-rasoi-gold selection:text-rasoi-dark">
+    <div id="root"></div>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Neelam Ki Gharelu Rasoi - Redirecting</title>
+    <script>
+      (function() {
+        var path = window.location.pathname.toLowerCase();
+        if (path.includes('/admin')) {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+              for (var i = 0; i < regs.length; i++) regs[i].unregister();
+            });
+          }
+          window.location.replace('/neelam-ki-gharelu-rasoi/admin/index.html');
+        } else {
+          window.location.replace('/neelam-ki-gharelu-rasoi/');
+        }
+      })();
+    </script>
+    <meta http-equiv="refresh" content="1;url=/neelam-ki-gharelu-rasoi/" />
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #FDFBF7;
+        color: #1F4D3A;
+      }
+      .card {
+        text-align: center;
+        padding: 2rem;
+      }
+      a {
+        color: #D9822B;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Redirecting to Neelam Ki Gharelu Rasoi...</h2>
+      <p>If you are not redirected automatically, <a href="/neelam-ki-gharelu-rasoi/">click here</a>.</p>
+    </div>
+  </body>
+</html>
