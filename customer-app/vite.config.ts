@@ -8,6 +8,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        navigateFallbackDenylist: [/\/admin/i, /admin/i],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}']
+      },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
         name: 'Neelam Ki Gharelu Rasoi',
