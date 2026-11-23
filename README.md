@@ -24,8 +24,18 @@ A complete, production-ready, full-stack food ordering platform consisting of **
 - **Category**: 100% Pure Vegetarian Homemade Food (Desi Ghee preparation)
 - **Official Location**: Moradabad, Uttar Pradesh, India
 - **Official Kitchen Address**: P S 31, Panchsheel Apartment, Kanth Road, Moradabad - 244001
-- **Official Contact Helpline**: +91 9997433379
+- **Official Contact Helpline**: +91 9997433379 / +91 8272072057
+- **Delivery Policy**: FREE delivery within 5 km on all orders; ₹30 for orders above 5 km
 - **Operating Hours**: 7:00 AM – 10:30 PM (7 Days a Week)
+
+---
+
+## 🌐 Live Hosted Links & Downloads
+- **Public Customer Web App**: [https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/](https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/)
+- **Private Admin Management Dashboard**: [https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/admin/](https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/admin/)
+- **Android App Download (APK)**: [Download Neelam-Ki-Gharelu-Rasoi.apk (v1.0.0)](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.apk)
+- **Android App Bundle (AAB)**: [Download Neelam-Ki-Gharelu-Rasoi.aab (v1.0.0)](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.aab)
+- **GitHub Repository**: [https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi)
 
 ---
 
