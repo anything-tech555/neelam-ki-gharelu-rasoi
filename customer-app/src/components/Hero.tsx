@@ -1,9 +1,15 @@
-import React from 'react';
-import { Sparkles, ShieldCheck, Clock, Award, Tag, Heart, Smartphone, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, ShieldCheck, Clock, Award, Tag, Heart, Smartphone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { isRunningInApp } from '../utils/platform';
 
 export const Hero: React.FC = () => {
   const { lang, t } = useLanguage();
+  const [inApp, setInApp] = useState(false);
+
+  useEffect(() => {
+    setInApp(isRunningInApp());
+  }, []);
 
   return (
     <section className="relative bg-gradient-to-b from-rasoi-green via-rasoi-green to-rasoi-cream pt-6 pb-12 px-4 overflow-hidden">
@@ -33,7 +39,7 @@ export const Hero: React.FC = () => {
 
             <p className="text-white/85 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
               {lang === 'hi'
-                ? 'नीलम शर्मा जी के हाथों का बना पारंपरिक स्वाद। शुद्ध देसी घी, ताजा मसाले और 100% हाइजीनिक घरेलू रसोई। कांठ रोड, मुरादाबाद।'
+                ? 'नीलम शर्मा जी के हाथों का बना पारंपरिक स्वाद। शुद्ध देसी घी, ताज़ा मसाले और 100% हाइजीनिक घरेलू रसोई। कांठ रोड, मुरादाबाद।'
                 : 'Experience the authentic warmth of motherly cooking by Neelam Sharma. Prepared with pure desi ghee, freshly ground spices, and zero commercial preservatives.'}
             </p>
 
@@ -54,7 +60,7 @@ export const Hero: React.FC = () => {
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-white">25-35 Mins</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-white">20-30 Mins</h4>
                   <p className="text-[11px] text-white/70">Piping Hot Delivery</p>
                 </div>
               </div>
@@ -79,7 +85,7 @@ export const Hero: React.FC = () => {
                 <div>
                   <p className="text-xs text-emerald-300 font-bold uppercase tracking-wider">Free Delivery Area</p>
                   <p className="text-xs sm:text-sm font-semibold text-white">
-                    FREE Delivery within 5 km (even on orders under ₹100, like ₹65 or ₹70)! Above 5 km: ₹30.
+                    FREE Delivery within 5 km (even on small orders like ₹65 or ₹70)! Above 5 km: ₹30.
                   </p>
                 </div>
               </div>
@@ -105,21 +111,23 @@ export const Hero: React.FC = () => {
               </span>
             </div>
 
-            {/* Android App Download Banner */}
-            <div className="pt-1 flex items-center gap-3">
-              <a
-                href="/Neelam-Ki-Gharelu-Rasoi.apk"
-                download="Neelam-Ki-Gharelu-Rasoi.apk"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-rasoi-dark font-bold text-xs sm:text-sm hover:bg-rasoi-gold transition-colors shadow-md group"
-              >
-                <Smartphone className="w-4 h-4 text-rasoi-green group-hover:text-rasoi-dark transition-colors" />
-                <span>Download Android App</span>
-                <span className="text-[10px] bg-rasoi-gold/30 text-rasoi-dark px-1.5 py-0.5 rounded font-mono font-semibold">APK 3.8 MB</span>
-              </a>
-              <span className="text-xs text-white/70 hidden sm:inline">
-                Instant ordering • Real-time status • No installation fee
-              </span>
-            </div>
+            {/* Android App Download Banner - ONLY SHOWN ON WEBSITE, HIDDEN INSIDE APP */}
+            {!inApp && (
+              <div className="pt-1 flex items-center gap-3">
+                <a
+                  href="./Neelam-Ki-Gharelu-Rasoi.apk"
+                  download="Neelam-Ki-Gharelu-Rasoi.apk"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-rasoi-dark font-bold text-xs sm:text-sm hover:bg-rasoi-gold transition-colors shadow-md group"
+                >
+                  <Smartphone className="w-4 h-4 text-rasoi-green group-hover:text-rasoi-dark transition-colors" />
+                  <span>Download Android App</span>
+                  <span className="text-[10px] bg-rasoi-gold/30 text-rasoi-dark px-1.5 py-0.5 rounded font-mono font-semibold">APK</span>
+                </a>
+                <span className="text-xs text-white/70 hidden sm:inline">
+                  Install on mobile for fast ordering
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Right Visual Image Card */}
@@ -141,7 +149,7 @@ export const Hero: React.FC = () => {
                   Royal Shahi Paneer Thali
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-200 mt-1 line-clamp-2">
-                  Slow-simmered shahi paneer, dal makhani, butter rotis, jeera rice & dessert.
+                  Slow-simmered shahi paneer in pure desi ghee, dal makhani, butter rotis, jeera rice & gulab jamun.
                 </p>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-white/20">
                   <span className="font-heading font-bold text-rasoi-gold text-xl">₹149 <span className="text-xs line-through text-white/60 font-normal">₹160</span></span>

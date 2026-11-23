@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, MapPin, Clock, ShieldCheck, Heart, Sparkles, Navigation, Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { isRunningInApp } from '../utils/platform';
 
 export const Footer: React.FC = () => {
   const { lang, t } = useLanguage();
+  const [inApp, setInApp] = useState(false);
+
+  useEffect(() => {
+    setInApp(isRunningInApp());
+  }, []);
 
   return (
     <footer className="bg-rasoi-dark text-white border-t border-rasoi-green/40 pt-12 pb-24 sm:pb-12 px-4">
@@ -26,105 +32,113 @@ export const Footer: React.FC = () => {
               नीलम की घरेलू रसोई • शुद्ध शाकाहारी भोजन
             </p>
             <p className="text-xs text-white/70 leading-relaxed">
-              Wholesome home-cooked vegetarian delights prepared daily using handpicked ingredients, desi ghee, and motherly care.
+              Wholesome home-cooked vegetarian delights prepared daily using handpicked ingredients, pure desi ghee, and motherly care.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <span className="veg-badge"></span>
               <span className="text-xs font-bold text-green-400">100% PURE VEGETARIAN</span>
             </div>
-            <div className="pt-2">
-              <a
-                href="/Neelam-Ki-Gharelu-Rasoi.apk"
-                download="Neelam-Ki-Gharelu-Rasoi.apk"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rasoi-gold text-rasoi-dark font-bold text-xs hover:bg-white transition-all shadow-sm hover:shadow-md"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Download Android App (APK)
-              </a>
-            </div>
+
+            {/* ONLY SHOWN ON WEBSITE, HIDDEN INSIDE INSTALLED APP */}
+            {!inApp && (
+              <div className="pt-2">
+                <a
+                  href="./Neelam-Ki-Gharelu-Rasoi.apk"
+                  download="Neelam-Ki-Gharelu-Rasoi.apk"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rasoi-gold text-rasoi-dark font-bold text-xs hover:bg-white transition-all shadow-sm hover:shadow-md"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download Android App (APK)
+                </a>
+              </div>
+            )}
           </div>
 
           {/* Col 2: Business Address */}
           <div className="space-y-3">
             <h4 className="font-heading font-bold text-sm text-rasoi-gold uppercase tracking-wider">
-              Our Kitchen Address
+              Kitchen Address
             </h4>
-            <div className="flex items-start gap-2 text-xs text-white/80">
-              <MapPin className="w-4 h-4 text-rasoi-gold shrink-0 mt-0.5" />
-              <address className="not-italic leading-relaxed">
-                P S 31, Panchsheel Apartment,<br />
-                Kanth Road, Moradabad,<br />
-                Uttar Pradesh - 244001, India
-              </address>
-            </div>
-            <div className="pt-1">
-              <a
-                href="https://maps.google.com/?q=Panchsheel+Apartment+Kanth+Road+Moradabad"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-rasoi-gold hover:underline font-semibold"
-              >
-                <Navigation className="w-3.5 h-3.5" />
-                View on Google Maps
-              </a>
+            <div className="space-y-2 text-xs text-white/80">
+              <p className="font-medium text-white flex items-start gap-1.5">
+                <MapPin className="w-4 h-4 text-rasoi-gold shrink-0 mt-0.5" />
+                <span>P S 31, Panchsheel Apartment, Kanth Road, Moradabad, Uttar Pradesh, 244001</span>
+              </p>
+              <p className="text-white/60 pl-5">
+                Landmark: Near Main Entrance, Kanth Road corridor
+              </p>
+              <div className="pt-1 pl-5">
+                <span className="text-[11px] bg-emerald-900/60 border border-emerald-500/40 px-2 py-0.5 rounded text-emerald-300 font-bold">
+                  FREE Delivery within 5 km!
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Col 3: Contact & Timings */}
+          {/* Col 3: Direct Helplines */}
           <div className="space-y-3">
             <h4 className="font-heading font-bold text-sm text-rasoi-gold uppercase tracking-wider">
-              Official Helpline
+              Direct Kitchen Helpline
             </h4>
-            <div className="space-y-2 text-xs text-white/80">
-              <a href="tel:9997433379" className="flex items-center gap-2 hover:text-rasoi-gold transition-colors font-bold text-sm text-white">
-                <Phone className="w-4 h-4 text-rasoi-gold" />
+            <div className="space-y-2.5 text-xs text-white/80">
+              <a
+                href="tel:9997433379"
+                className="flex items-center gap-2 text-white hover:text-rasoi-gold transition-colors font-bold text-sm"
+              >
+                <div className="p-1.5 rounded-lg bg-white/10 text-rasoi-gold">
+                  <Phone className="w-4 h-4" />
+                </div>
                 <span>+91 9997433379</span>
               </a>
-              <a href="tel:8272072057" className="flex items-center gap-2 hover:text-rasoi-gold transition-colors font-bold text-sm text-white">
-                <Phone className="w-4 h-4 text-rasoi-gold" />
+
+              <a
+                href="tel:8272072057"
+                className="flex items-center gap-2 text-white hover:text-rasoi-gold transition-colors font-bold text-sm"
+              >
+                <div className="p-1.5 rounded-lg bg-white/10 text-rasoi-gold">
+                  <Phone className="w-4 h-4" />
+                </div>
                 <span>+91 8272072057</span>
               </a>
-              <div className="flex items-center gap-2 pt-1">
-                <Clock className="w-4 h-4 text-rasoi-gold" />
-                <span>Open: 7:00 AM – 10:30 PM (All 7 Days)</span>
+
+              <div className="flex items-center gap-2 pt-1 text-white/70">
+                <Clock className="w-4 h-4 text-rasoi-gold shrink-0" />
+                <span>7:00 AM – 10:30 PM (7 Days a Week)</span>
               </div>
-              <p className="text-[11px] text-white/60">
-                Breakfast: 7 AM - 11 AM<br />
-                Lunch: 12 PM - 3:30 PM<br />
-                Dinner: 7 PM - 10:30 PM
-              </p>
             </div>
           </div>
 
-          {/* Col 4: Trust & Guarantee */}
+          {/* Col 4: Safe Food Promises */}
           <div className="space-y-3">
             <h4 className="font-heading font-bold text-sm text-rasoi-gold uppercase tracking-wider">
-              Homemade Hygiene Pledge
+              Our Purity Promise
             </h4>
-            <div className="space-y-2 text-xs text-white/80">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
-                <span>No Artificial Colors or Preservatives</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
-                <span>Prepared in Clean Domestic Kitchen</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
-                <span>Safe Tamper-Proof Thermal Packing</span>
-              </div>
-            </div>
+            <ul className="space-y-2 text-xs text-white/80">
+              <li className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+                <span>100% Desi Ghee Preparation</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+                <span>Zero Commercial Preservatives</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+                <span>Fresh Vegetables Cooked Daily</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+                <span>Hygienic Eco-Friendly Packaging</span>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom copyright */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-3">
-          <p>
-            © {new Date().getFullYear()} Neelam Ki Gharelu Rasoi. All rights reserved.
-          </p>
-          <p className="flex items-center gap-1">
-            Made with <Heart className="w-3.5 h-3.5 text-rasoi-red fill-rasoi-red" /> for food lovers in Moradabad
+        <div className="pt-8 border-t border-white/10 text-center text-xs text-white/50 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p>© {new Date().getFullYear()} Neelam Ki Gharelu Rasoi. All Rights Reserved. Moradabad, UP.</p>
+          <p className="flex items-center gap-1 text-rasoi-gold">
+            <span>शुद्ध शाकाहारी घरेलू भोजन • स्वाद अपनों जैसा</span>
           </p>
         </div>
       </div>

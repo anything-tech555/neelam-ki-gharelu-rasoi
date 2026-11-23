@@ -7,10 +7,27 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-body {
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  background-color: #FDFBF7;
+  margin: 0;
+  padding: 0;
   padding-top: var(--safe-top);
   padding-bottom: var(--safe-bottom);
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
+  background-color: #FDFBF7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Custom veg symbol matching Indian FSSAI pure veg green border & dot */

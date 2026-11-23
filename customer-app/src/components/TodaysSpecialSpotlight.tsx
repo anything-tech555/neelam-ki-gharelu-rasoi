@@ -25,7 +25,7 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
     : [specialItem.imageUrl];
 
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-6 pb-2">
+    <section className="max-w-7xl mx-auto px-4 pt-6 pb-4">
       <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-rasoi-green via-emerald-800 to-teal-900 text-white shadow-2xl border-2 border-rasoi-gold/40">
         {/* Decorative background blurs */}
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-rasoi-gold/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -68,11 +68,11 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
               </div>
               <div className="flex items-center gap-1.5 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/10">
                 <Star className="w-4 h-4 fill-rasoi-gold text-rasoi-gold" />
-                <span>{specialItem.rating || 5.0} ({specialItem.ratingCount || 420}+ Reviews)</span>
+                <span>{specialItem.rating || 4.9} ({specialItem.ratingCount || 420}+ Reviews)</span>
               </div>
               <div className="flex items-center gap-1.5 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/10">
                 <ShieldCheck className="w-4 h-4 text-green-400" />
-                <span>Desi Ghee Recipe</span>
+                <span>Pure Desi Ghee</span>
               </div>
             </div>
 
@@ -93,6 +93,7 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
               <div className="flex items-center gap-3">
                 {/* Click to open Big Screen view */}
                 <button
+                  type="button"
                   onClick={() => onOpenDishDetail(specialItem)}
                   className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/30 font-bold text-xs sm:text-sm flex items-center gap-2 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 shadow-md"
                 >
@@ -105,6 +106,7 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
                   quantity > 0 ? (
                     <div className="flex items-center bg-rasoi-gold text-rasoi-dark rounded-xl font-bold shadow-md">
                       <button
+                        type="button"
                         onClick={() => updateQuantity(specialItem.id, -1)}
                         className="w-9 h-9 flex items-center justify-center hover:bg-black/10 rounded-l-xl transition-colors"
                       >
@@ -114,6 +116,7 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
                         {quantity}
                       </span>
                       <button
+                        type="button"
                         onClick={() => updateQuantity(specialItem.id, 1)}
                         className="w-9 h-9 flex items-center justify-center hover:bg-black/10 rounded-r-xl transition-colors"
                       >
@@ -122,10 +125,11 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
                     </div>
                   ) : (
                     <button
+                      type="button"
                       onClick={() => addToCart(specialItem)}
                       className="px-5 py-2.5 rounded-xl bg-rasoi-gold hover:bg-white text-rasoi-dark font-heading font-extrabold text-xs sm:text-sm shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
                     >
-                      <span>Order Special</span>
+                      <span>Order Today's Special</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   )
@@ -159,7 +163,7 @@ export const TodaysSpecialSpotlight: React.FC<TodaysSpecialSpotlightProps> = ({ 
               {/* Photo count pill */}
               <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
                 <Eye className="w-3.5 h-3.5 text-rasoi-gold" />
-                <span>{gallery.length > 1 ? `${gallery.length} Photos` : 'Click for Big View'}</span>
+                <span>{gallery.length > 1 ? `${gallery.length} Photos (Click to Zoom)` : 'Click for Big View'}</span>
               </div>
             </div>
           </div>

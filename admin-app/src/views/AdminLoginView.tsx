@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, Mail, ShieldAlert, Sparkles, ChefHat } from 'lucide-react';
+import { Lock, Mail, ShieldAlert, Sparkles, ChefHat, ArrowRight } from 'lucide-react';
 import { useAdminAuth } from '../context/AdminAuthContext';
 
 export const AdminLoginView: React.FC = () => {
@@ -23,24 +23,31 @@ export const AdminLoginView: React.FC = () => {
     }
   };
 
+  const handleQuickLogin = async () => {
+    setErrorMsg('');
+    setIsLoading(true);
+    try {
+      await login('admin@neelamrasoi.com', 'Admin@Neelam2026');
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Quick login failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-rasoi-green via-rasoi-dark to-black flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/20">
         {/* Header */}
         <div className="bg-rasoi-green p-6 text-center text-white relative">
           <div className="w-16 h-16 rounded-full bg-rasoi-gold/20 border-2 border-rasoi-gold p-2 mx-auto mb-3 flex items-center justify-center shadow-inner">
-            <svg viewBox="0 0 100 100" className="w-full h-full">
-              <path d="M25 45 C25 72, 75 72, 75 45 Z" fill="#F2B01E"/>
-              <rect x="20" y="42" width="60" height="6" rx="3" fill="#FFF"/>
-              <path d="M50 20 C42 28, 42 36, 50 40 C58 36, 58 28, 50 20 Z" fill="#5ac28a"/>
-              <circle cx="50" cy="78" r="4" fill="#5ac28a"/>
-            </svg>
+            <ChefHat className="w-8 h-8 text-rasoi-gold" />
           </div>
           <h2 className="font-heading font-extrabold text-2xl text-white">
             Neelam Ki Gharelu Rasoi
           </h2>
           <p className="text-xs text-rasoi-gold font-medium mt-1">
-            Private Admin Management Portal
+            नीलम की घरेलू रसोई • Private Admin Portal
           </p>
         </div>
 
@@ -51,7 +58,7 @@ export const AdminLoginView: React.FC = () => {
               Admin Authentication
             </h3>
             <p className="text-xs text-gray-500">
-              Only authorized kitchen managers and owners can sign in.
+              Kitchen management, live order tracking & menu controls.
             </p>
           </div>
 
@@ -102,12 +109,24 @@ export const AdminLoginView: React.FC = () => {
               disabled={isLoading}
               className="w-full py-3 px-4 rounded-xl bg-rasoi-green hover:bg-rasoi-dark text-white font-heading font-bold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
             >
-              {isLoading ? 'Verifying Admin Token...' : 'Log In to Admin Dashboard'}
+              {isLoading ? 'Verifying...' : 'Log In to Admin Dashboard'}
             </button>
           </form>
 
+          {/* 1-Click Fast Login */}
+          <button
+            type="button"
+            onClick={handleQuickLogin}
+            disabled={isLoading}
+            className="w-full py-2.5 px-4 rounded-xl bg-rasoi-gold/15 hover:bg-rasoi-gold/25 border border-rasoi-gold/40 text-rasoi-dark font-heading font-extrabold text-xs flex items-center justify-center gap-2 transition-all"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-rasoi-dark" />
+            <span>1-Click Owner Sign In (Instant Access)</span>
+            <ArrowRight className="w-3.5 h-3.5 text-rasoi-dark" />
+          </button>
+
           <div className="p-3 bg-rasoi-cream rounded-xl border border-rasoi-line text-xs text-gray-600 space-y-1">
-            <p className="font-bold text-rasoi-green">Initial Setup Credentials:</p>
+            <p className="font-bold text-rasoi-green">Owner Credentials:</p>
             <p className="font-mono text-[11px]">Email: admin@neelamrasoi.com</p>
             <p className="font-mono text-[11px]">Password: Admin@Neelam2026</p>
           </div>

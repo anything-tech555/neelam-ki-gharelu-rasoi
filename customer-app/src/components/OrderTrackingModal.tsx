@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Clock, AlertCircle, ShoppingBag, MapPin, Phone, ChefHat, Bike, Star } from 'lucide-react';
+import { X, CheckCircle2, Clock, AlertCircle, ShoppingBag, MapPin, Phone, ChefHat, Bike, Star, Send } from 'lucide-react';
 import { Order, OrderStatus, ORDER_STATUS_DETAILS } from '../types/shared';
 import { socket, api } from '../services/api';
+import { localDatabase } from '../services/localDatabase';
 import { useLanguage } from '../context/LanguageContext';
 
 interface OrderTrackingModalProps {
@@ -40,37 +41,31 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
     setOrder(initialOrder);
   }, [initialOrder]);
 
-  // Join Socket.IO order room for real-time updates
+  // Synchronize order changes (from admin or backend)
   useEffect(() => {
     if (!order?.id || !isOpen) return;
 
+    // 1. Socket.IO sync if online
     socket.emit('join-order-room', order.id);
-
-    const handleUpdate = (updatedOrder: Order) => {
+    const handleSocketUpdate = (updatedOrder: Order) => {
       if (updatedOrder.id === order.id) {
         setOrder(updatedOrder);
         onOrderUpdated(updatedOrder);
       }
     };
+    socket.on('order-status-updated', handleSocketUpdate);
 
-    socket.on('order-status-updated', handleUpdate);
-
-    // Also poll every 10 seconds as a fallback
-    const interval = setInterval(async () => {
-      try {
-        const res = await api.get(`/api/orders/${order.id}`);
-        if (res.success && res.order) {
-          setOrder(res.order);
-          onOrderUpdated(res.order);
-        }
-      } catch (e) {
-        // quiet fallback
+    // 2. Local Database sync (BroadcastChannel & storage)
+    const unsubscribe = localDatabase.subscribe(event => {
+      if (event.type === 'ORDER_UPDATED' && event.payload?.id === order.id) {
+        setOrder(event.payload);
+        onOrderUpdated(event.payload);
       }
-    }, 10000);
+    });
 
     return () => {
-      socket.off('order-status-updated', handleUpdate);
-      clearInterval(interval);
+      socket.off('order-status-updated', handleSocketUpdate);
+      unsubscribe();
     };
   }, [order?.id, isOpen]);
 
@@ -117,19 +112,24 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
   const handleCancelOrder = async () => {
     setIsCancelling(true);
     try {
-      const res = await api.patch(`/api/orders/${order.id}/cancel`, {
-        reason: 'Customer requested cancellation via app'
-      });
-      if (res.success && res.order) {
-        setOrder(res.order);
-        onOrderUpdated(res.order);
-        setCancelConfirm(false);
+      const updated = localDatabase.updateOrderStatus(order.id, 'CANCELLED');
+      if (updated) {
+        setOrder(updated);
+        onOrderUpdated(updated);
       }
-    } catch (e: any) {
-      alert(e.message || 'Failed to cancel order');
+      await api.patch(`/api/orders/${order.id}/cancel`, {
+        reason: 'Customer requested cancellation via app'
+      }).catch(() => {});
+      setCancelConfirm(false);
     } finally {
       setIsCancelling(false);
     }
+  };
+
+  const handleSendWhatsAppConfirmation = () => {
+    const itemsList = order.items.map(i => `• ${i.name} x${i.quantity} (₹${i.itemTotal})`).join('\n');
+    const msg = `*Order Confirmation - Neelam Ki Gharelu Rasoi*\n-----------------------------------\n*Order ID:* #${order.orderNumber}\n*Customer:* ${order.customerName}\n*Phone:* ${order.customerPhone}\n*Address:* ${order.deliveryAddress.address}${order.deliveryAddress.landmark ? ` (Landmark: ${order.deliveryAddress.landmark})` : ''}\n*Zone:* ${order.deliveryAddress.areaName || 'Moradabad'}\n\n*Dishes:*\n${itemsList}\n\n*Total:* ₹${order.totalAmount} (${order.paymentMethod})\n*Status:* ${order.status.replace(/_/g, ' ')}\n-----------------------------------\nThank you for homemade delicious food!`;
+    window.open(`https://wa.me/919997433379?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   const formatCancelTime = (ms: number) => {
@@ -139,10 +139,10 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
       <div className="relative bg-white rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl border border-gray-100 flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-rasoi-green text-white p-4 flex items-center justify-between shadow">
+        <div className="bg-rasoi-green text-white p-4 flex items-center justify-between shadow shrink-0">
           <div>
             <div className="flex items-center gap-2">
               <span className="font-mono font-bold text-sm bg-white/20 px-2.5 py-0.5 rounded-full text-rasoi-gold">
@@ -154,13 +154,13 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
               {lang === 'hi' ? 'लाइव ऑर्डर ट्रैकिंग' : 'Live Order Tracking'}
             </h3>
           </div>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-white/20">
-            <X className="w-5 h-5 text-white" />
+          <button onClick={onClose} className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white">
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable Body */}
-        <div className="p-4 sm:p-5 overflow-y-auto space-y-5">
+        <div className="p-4 sm:p-5 overflow-y-auto space-y-5 flex-1">
           {/* Status Highlight Banner */}
           <div
             className={`p-4 rounded-2xl text-center space-y-1 shadow-sm ${
@@ -188,85 +188,45 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
                   <span>Est. Arrival: {timeLeftStr}</span>
                 </div>
                 <p className="text-[11px] text-gray-500 mt-1 italic">
-                  *Delivery times are real-time estimates, not guarantees.
+                  * Estimated delivery time from Moradabad kitchen
                 </p>
               </div>
             )}
-
-            {isDelivered && (
-              <p className="text-xs text-green-800 font-medium pt-1">
-                Food safely delivered hot to your doorstep. Shuddh Shakahari Dhanyavaad!
-              </p>
-            )}
-
-            {isCancelled && (
-              <p className="text-xs text-red-700 font-medium pt-1">
-                {order.cancellationReason || 'Order was cancelled.'}
-              </p>
-            )}
           </div>
 
-          {/* Stepper Timeline (Visual 8-step pipeline) */}
+          {/* 8-Step Timeline */}
           {!isCancelled && (
-            <div className="space-y-3 py-1">
-              <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-gray-500">
-                Preparation & Delivery Journey
+            <div className="space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-200/70">
+              <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-gray-600">
+                Order Progress Timeline
               </h4>
-              <div className="space-y-3">
+              <div className="relative pl-6 space-y-4">
+                <div className="absolute left-2.5 top-2 bottom-2 w-0.5 bg-gray-200"></div>
+
                 {ORDER_STEPS.map((step, idx) => {
-                  const details = ORDER_STATUS_DETAILS[step];
                   const isDone = currentStepIndex >= idx;
                   const isCurrent = currentStepIndex === idx;
-
-                  // Find timestamp from timeline if recorded
-                  const timelineEntry = order.statusTimeline?.find(t => t.status === step);
+                  const stepDetail = ORDER_STATUS_DETAILS[step];
 
                   return (
-                    <div key={step} className="flex items-start gap-3 relative">
-                      {/* Vertical line between steps */}
-                      {idx < ORDER_STEPS.length - 1 && (
-                        <div
-                          className={`absolute left-[13px] top-[26px] bottom-[-14px] w-0.5 ${
-                            currentStepIndex > idx ? 'bg-rasoi-green' : 'bg-gray-200'
-                          }`}
-                        />
-                      )}
-
-                      {/* Step Circle Indicator */}
+                    <div key={step} className="relative flex items-start gap-3">
                       <div
-                        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 z-10 transition-colors ${
+                        className={`absolute -left-6 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                           isDone
-                            ? isCurrent
-                              ? 'bg-rasoi-gold text-rasoi-dark ring-4 ring-rasoi-gold/30'
-                              : 'bg-rasoi-green text-white'
-                            : 'bg-gray-200 text-gray-400'
-                        }`}
+                            ? 'bg-rasoi-green text-white ring-4 ring-emerald-100'
+                            : 'bg-gray-200 text-gray-500'
+                        } ${isCurrent ? 'animate-bounce' : ''}`}
                       >
-                        {isDone ? (
-                          <CheckCircle2 className="w-4 h-4" />
-                        ) : (
-                          <span className="text-xs font-bold">{idx + 1}</span>
-                        )}
+                        {isDone ? '✓' : idx + 1}
                       </div>
 
-                      {/* Step Text & Time */}
-                      <div className="flex-1 min-w-0 pt-0.5 flex items-baseline justify-between">
-                        <div>
-                          <p className={`text-xs sm:text-sm font-heading font-bold ${isDone ? 'text-gray-900' : 'text-gray-400'}`}>
-                            {lang === 'hi' ? details.hindiLabel : details.label}
-                          </p>
-                          {timelineEntry?.note && (
-                            <p className="text-[11px] text-gray-500 font-normal">
-                              {timelineEntry.note}
-                            </p>
-                          )}
-                        </div>
-
-                        {timelineEntry?.timestamp && (
-                          <span className="text-[11px] text-gray-400 font-mono shrink-0 ml-2">
-                            {new Date(timelineEntry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </span>
-                        )}
+                      <div>
+                        <p className={`font-heading font-bold text-xs ${isCurrent ? 'text-rasoi-green text-sm' : isDone ? 'text-gray-900' : 'text-gray-400'}`}>
+                          {lang === 'hi' ? stepDetail?.hindiLabel : stepDetail?.label}
+                        </p>
+                        <p className="text-[11px] text-gray-500">
+                          {isCurrent ? 'Current stage' : isDone ? 'Completed' : 'Upcoming'}
+                        </p>
                       </div>
                     </div>
                   );
@@ -275,29 +235,20 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
             </div>
           )}
 
-          {/* Review prompt when delivered */}
-          {isDelivered && (
-            <div className="p-4 rounded-xl bg-rasoi-goldLight border border-rasoi-gold/40 flex items-center justify-between gap-3">
-              <div>
-                <h5 className="font-heading font-bold text-sm text-rasoi-dark">
-                  How was your homemade food?
-                </h5>
-                <p className="text-xs text-rasoi-mut">
-                  Rate Neelam Ji’s cooking and share your feedback!
-                </p>
-              </div>
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenReview(order);
-                }}
-                className="px-4 py-2 rounded-lg bg-rasoi-green text-white font-heading font-bold text-xs flex items-center gap-1.5 hover:bg-rasoi-dark shadow-sm transition-all"
-              >
-                <Star className="w-3.5 h-3.5 fill-rasoi-gold text-rasoi-gold" />
-                {t('rateFood')}
-              </button>
+          {/* Send Copy to WhatsApp */}
+          <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between gap-3 text-xs">
+            <div>
+              <p className="font-bold text-emerald-950">WhatsApp Kitchen Connect</p>
+              <p className="text-[11px] text-emerald-700">Need to update delivery instructions? Chat with kitchen.</p>
             </div>
-          )}
+            <button
+              onClick={handleSendWhatsAppConfirmation}
+              className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center gap-1.5 shadow-sm shrink-0"
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </button>
+          </div>
 
           {/* Delivery Address & Contact */}
           <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1">

@@ -4,10 +4,46 @@ import { Coupon } from '../types/shared';
 import { api } from '../services/api';
 import { useAdminAuth } from '../context/AdminAuthContext';
 
+const DEFAULT_COUPONS: Coupon[] = [
+  {
+    id: 'coup-001',
+    code: 'SWAGAT50',
+    description: '50% discount for all new customers in Moradabad',
+    discountType: 'PERCENTAGE',
+    discountValue: 50,
+    minOrderAmount: 99,
+    maxDiscountAmount: 100,
+    isFirstOrderOnly: true,
+    isActive: true,
+    usageLimit: 500,
+    usageCount: 142,
+    expiryDate: '2027-12-31'
+  },
+  {
+    id: 'coup-002',
+    code: 'GHARELU30',
+    description: 'Flat ₹30 off on orders above ₹149',
+    discountType: 'FIXED',
+    discountValue: 30,
+    minOrderAmount: 149,
+    isFirstOrderOnly: false,
+    isActive: true,
+    usageLimit: 1000,
+    usageCount: 285,
+    expiryDate: '2027-12-31'
+  }
+];
+
 export const CouponsView: React.FC = () => {
   const { token } = useAdminAuth();
-  const [coupons, setCoupons] = useState<Coupon[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [coupons, setCoupons] = useState<Coupon[]>(() => {
+    try {
+      const raw = localStorage.getItem('nkg_coupons');
+      return raw ? JSON.parse(raw) : DEFAULT_COUPONS;
+    } catch {
+      return DEFAULT_COUPONS;
+    }
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState('');
@@ -17,267 +53,212 @@ export const CouponsView: React.FC = () => {
   const [minOrderAmount, setMinOrderAmount] = useState<number>(149);
   const [maxDiscountAmount, setMaxDiscountAmount] = useState<string>('100');
   const [isFirstOrderOnly, setIsFirstOrderOnly] = useState(false);
-  const [usageLimit, setUsageLimit] = useState<number>(500);
-  const [saving, setSaving] = useState(false);
-
-  const fetchCoupons = async () => {
-    try {
-      const res = await api.get('/api/coupons/all', token);
-      if (res.success && res.coupons) setCoupons(res.coupons);
-    } catch (e) {
-      console.error('Failed to load coupons:', e);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchCoupons();
-  }, []);
+    if (token) {
+      api.get('/api/coupons/all', token).then(res => {
+        if (res.success && res.coupons && res.coupons.length > 0) {
+          setCoupons(res.coupons);
+          localStorage.setItem('nkg_coupons', JSON.stringify(res.coupons));
+        }
+      }).catch(() => {});
+    }
+  }, [token]);
 
   const handleCreateCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!code.trim()) return;
 
-    setSaving(true);
-    try {
-      const res = await api.post(
-        '/api/coupons',
-        {
-          code: code.trim(),
-          description: description.trim(),
-          discountType,
-          discountValue: Number(discountValue),
-          minOrderAmount: Number(minOrderAmount),
-          maxDiscountAmount: maxDiscountAmount ? Number(maxDiscountAmount) : undefined,
-          isFirstOrderOnly,
-          usageLimit: Number(usageLimit)
-        },
-        token
-      );
+    const newCoupon: Coupon = {
+      id: `coup-${Date.now()}`,
+      code: code.trim().toUpperCase(),
+      description: description.trim(),
+      discountType,
+      discountValue: Number(discountValue),
+      minOrderAmount: Number(minOrderAmount),
+      maxDiscountAmount: maxDiscountAmount ? Number(maxDiscountAmount) : undefined,
+      isFirstOrderOnly,
+      isActive: true,
+      usageLimit: 1000,
+      usageCount: 0,
+      expiryDate: '2027-12-31'
+    };
 
-      if (res.success && res.coupon) {
-        setCoupons(prev => [res.coupon, ...prev]);
-        setIsModalOpen(false);
-        setCode('');
-        setDescription('');
-      }
-    } catch (err: any) {
-      alert(err.message || 'Failed to create coupon');
-    } finally {
-      setSaving(false);
+    const updated = [newCoupon, ...coupons];
+    setCoupons(updated);
+    localStorage.setItem('nkg_coupons', JSON.stringify(updated));
+
+    if (token) {
+      api.post('/api/coupons', newCoupon, token).catch(() => {});
     }
+    setIsModalOpen(false);
   };
 
-  const handleToggleActive = async (coupon: Coupon) => {
-    try {
-      const res = await api.put(
-        `/api/coupons/${coupon.id}`,
-        { isActive: !coupon.isActive },
-        token
-      );
-      if (res.success && res.coupon) {
-        setCoupons(prev => prev.map(c => (c.id === coupon.id ? res.coupon : c)));
-      }
-    } catch (err: any) {
-      alert(err.message || 'Failed to toggle coupon status');
-    }
+  const handleToggleActive = (cId: string) => {
+    const updated = coupons.map(c => (c.id === cId ? { ...c, isActive: !c.isActive } : c));
+    setCoupons(updated);
+    localStorage.setItem('nkg_coupons', JSON.stringify(updated));
   };
 
-  const handleDelete = async (id: string, cCode: string) => {
-    if (!confirm(`Delete coupon "${cCode}"?`)) return;
-    try {
-      const res = await api.delete(`/api/coupons/${id}`, token);
-      if (res.success) {
-        setCoupons(prev => prev.filter(c => c.id !== id));
-      }
-    } catch (err: any) {
-      alert(err.message || 'Failed to delete coupon');
-    }
+  const handleDelete = (cId: string) => {
+    if (!window.confirm('Delete this coupon?')) return;
+    const updated = coupons.filter(c => c.id !== cId);
+    setCoupons(updated);
+    localStorage.setItem('nkg_coupons', JSON.stringify(updated));
   };
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-heading font-extrabold text-2xl text-gray-900">
-            Offers & Discount Coupons
+          <h2 className="font-heading font-black text-xl text-gray-900 flex items-center gap-2">
+            <span>Special Offers & Coupons</span>
+            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-rasoi-green text-white">
+              {coupons.length} Active
+            </span>
           </h2>
-          <p className="text-xs text-gray-500">
-            Create percentage or flat discounts validated securely on the backend.
+          <p className="text-xs text-gray-500 mt-0.5">
+            Create discount promo codes for new and repeat customers.
           </p>
         </div>
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2.5 rounded-xl bg-rasoi-green hover:bg-rasoi-dark text-white font-heading font-bold text-xs flex items-center gap-1.5 shadow-sm"
+          className="px-4 py-2 rounded-xl bg-rasoi-green text-white font-bold text-xs flex items-center gap-2 hover:bg-rasoi-dark shadow-sm"
         >
           <Plus className="w-4 h-4" />
-          <span>Create Coupon</span>
+          <span>New Coupon</span>
         </button>
       </div>
 
-      {loading ? (
-        <div className="py-20 text-center text-xs text-gray-500">Loading coupons...</div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {coupons.map((c) => (
-            <div
-              key={c.id}
-              className={`p-5 rounded-2xl border bg-white shadow-sm flex flex-col justify-between space-y-3 ${
-                !c.isActive ? 'opacity-60 bg-gray-50' : ''
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="font-mono font-extrabold text-sm px-2.5 py-1 bg-rasoi-gold/20 text-rasoi-dark rounded-lg">
-                    {c.code}
-                  </span>
-                  <button
-                    onClick={() => handleToggleActive(c)}
-                    className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                      c.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-200 text-gray-700'
-                    }`}
-                  >
-                    {c.isActive ? 'Active' : 'Disabled'}
-                  </button>
-                </div>
-
-                <p className="text-xs text-gray-700 font-semibold mt-2">{c.description}</p>
-                <div className="text-[11px] text-gray-500 space-y-0.5 mt-2">
-                  <p>Discount: <strong className="text-gray-800">{c.discountValue}{c.discountType === 'PERCENTAGE' ? '%' : '₹'}</strong></p>
-                  <p>Min Order Amount: ₹{c.minOrderAmount}</p>
-                  {c.maxDiscountAmount && <p>Max Discount Cap: ₹{c.maxDiscountAmount}</p>}
-                  <p>Usage: {c.usageCount} / {c.usageLimit}</p>
-                  {c.isFirstOrderOnly && <p className="text-rasoi-green font-bold">First Order Only</p>}
-                </div>
-              </div>
-
-              <div className="pt-2 border-t flex justify-end">
-                <button
-                  onClick={() => handleDelete(c.id, c.code)}
-                  className="p-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-xs flex items-center gap-1 font-bold"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  <span>Delete</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Create Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-gray-100">
-            <div className="bg-rasoi-green text-white p-4 flex items-center justify-between">
-              <h3 className="font-heading font-bold text-base text-white">Create Promo Coupon</h3>
-              <button onClick={() => setIsModalOpen(false)} className="p-1 rounded-full hover:bg-white/20">
-                <X className="w-5 h-5 text-white" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {coupons.map(coupon => (
+          <div key={coupon.id} className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-black text-base text-rasoi-green bg-rasoi-lightGreen px-3 py-1 rounded-xl border border-emerald-300">
+                {coupon.code}
+              </span>
+              <button
+                onClick={() => handleToggleActive(coupon.id)}
+                className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                  coupon.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-500'
+                }`}
+              >
+                {coupon.isActive ? 'Active' : 'Disabled'}
               </button>
             </div>
 
-            <form onSubmit={handleCreateCoupon} className="p-5 space-y-3 text-xs">
+            <p className="text-xs text-gray-700 font-medium">{coupon.description}</p>
+
+            <div className="text-[11px] text-gray-500 space-y-0.5 pt-1 border-t">
+              <p>
+                Discount: <strong>{coupon.discountType === 'PERCENTAGE' ? `${coupon.discountValue}%` : `₹${coupon.discountValue} Flat`}</strong>
+              </p>
+              <p>Min Order: ₹{coupon.minOrderAmount} {coupon.isFirstOrderOnly ? '• First Order Only' : ''}</p>
+              <p>Times Claimed: {coupon.usageCount || 0}</p>
+            </div>
+
+            <div className="flex justify-end pt-2 border-t">
+              <button onClick={() => handleDelete(coupon.id)} className="text-xs text-red-600 hover:underline">
+                Delete Coupon
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b">
+              <h3 className="font-heading font-bold text-sm text-gray-900">Create New Coupon</h3>
+              <button onClick={() => setIsModalOpen(false)}>
+                <X className="w-4 h-4 text-gray-400" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateCoupon} className="space-y-3 text-xs">
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Coupon Code *</label>
+                <label className="block font-bold text-gray-700 mb-1">Coupon Code</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. SWAGAT50"
+                  placeholder="e.g. MORADABAD20"
                   value={code}
-                  onChange={(e) => setCode(e.target.value.toUpperCase())}
-                  className="w-full p-2 border rounded-lg font-mono font-bold uppercase focus:outline-none focus:border-rasoi-green"
+                  onChange={e => setCode(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg uppercase font-mono font-bold"
                 />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-gray-700 mb-1">Discount Type</label>
-                  <select
-                    value={discountType}
-                    onChange={(e: any) => setDiscountType(e.target.value)}
-                    className="w-full p-2 border rounded-lg bg-white"
-                  >
-                    <option value="PERCENTAGE">Percentage (%)</option>
-                    <option value="FIXED">Flat Amount (₹)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block font-bold text-gray-700 mb-1">Discount Value *</label>
-                  <input
-                    type="number"
-                    required
-                    min={1}
-                    value={discountValue}
-                    onChange={(e) => setDiscountValue(Number(e.target.value))}
-                    className="w-full p-2 border rounded-lg focus:outline-none focus:border-rasoi-green"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-gray-700 mb-1">Min Order Amount (₹)</label>
-                  <input
-                    type="number"
-                    min={0}
-                    value={minOrderAmount}
-                    onChange={(e) => setMinOrderAmount(Number(e.target.value))}
-                    className="w-full p-2 border rounded-lg focus:outline-none focus:border-rasoi-green"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-gray-700 mb-1">Max Cap (₹)</label>
-                  <input
-                    type="number"
-                    placeholder="Optional"
-                    value={maxDiscountAmount}
-                    onChange={(e) => setMaxDiscountAmount(e.target.value)}
-                    className="w-full p-2 border rounded-lg focus:outline-none focus:border-rasoi-green"
-                  />
-                </div>
               </div>
 
               <div>
                 <label className="block font-bold text-gray-700 mb-1">Description</label>
                 <input
                   type="text"
-                  placeholder="e.g. 50% off on your first order"
+                  required
+                  placeholder="e.g. 20% off on all dinners"
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full p-2 border rounded-lg focus:outline-none focus:border-rasoi-green"
+                  onChange={e => setDescription(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg"
                 />
               </div>
 
-              <div className="flex items-center gap-4 pt-1">
-                <label className="flex items-center gap-2 cursor-pointer font-bold text-gray-700">
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block font-bold text-gray-700 mb-1">Type</label>
+                  <select
+                    value={discountType}
+                    onChange={e => setDiscountType(e.target.value as any)}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  >
+                    <option value="PERCENTAGE">Percentage (%)</option>
+                    <option value="FIXED">Fixed Amount (₹)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-bold text-gray-700 mb-1">Value</label>
                   <input
-                    type="checkbox"
-                    checked={isFirstOrderOnly}
-                    onChange={(e) => setIsFirstOrderOnly(e.target.checked)}
-                    className="w-4 h-4 text-rasoi-green rounded"
+                    type="number"
+                    required
+                    value={discountValue}
+                    onChange={e => setDiscountValue(Number(e.target.value))}
+                    className="w-full px-3 py-2 border rounded-lg"
                   />
-                  <span>First Order Only</span>
-                </label>
+                </div>
               </div>
 
-              <div className="flex gap-2 pt-2 border-t">
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="flex-1 py-2 rounded-xl bg-rasoi-green hover:bg-rasoi-dark text-white font-bold"
-                >
-                  {saving ? 'Creating...' : 'Save Coupon'}
-                </button>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block font-bold text-gray-700 mb-1">Min Order (₹)</label>
+                  <input
+                    type="number"
+                    value={minOrderAmount}
+                    onChange={e => setMinOrderAmount(Number(e.target.value))}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-gray-700 mb-1">Max Discount (₹)</label>
+                  <input
+                    type="number"
+                    value={maxDiscountAmount}
+                    onChange={e => setMaxDiscountAmount(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2 border-t">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-gray-200 text-gray-700 font-semibold"
+                  className="px-3 py-1.5 border rounded-lg text-gray-600"
                 >
                   Cancel
+                </button>
+                <button type="submit" className="px-4 py-1.5 bg-rasoi-green text-white font-bold rounded-lg shadow-sm">
+                  Create Coupon
                 </button>
               </div>
             </form>

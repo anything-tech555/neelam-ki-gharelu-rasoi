@@ -21,17 +21,14 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
   const { lang, t } = useLanguage();
 
   const getIcon = (catName: string) => {
-    switch (catName.toLowerCase()) {
-      case 'breakfast': return <Sun className="w-4 h-4" />;
-      case 'lunch': return <Utensils className="w-4 h-4" />;
-      case 'dinner': return <Moon className="w-4 h-4" />;
-      case 'special thali':
-      case 'thali': return <Award className="w-4 h-4" />;
-      case 'evening snacks':
-      case 'snacks': return <Coffee className="w-4 h-4" />;
-      case 'beverages': return <GlassWater className="w-4 h-4" />;
-      default: return <Utensils className="w-4 h-4" />;
-    }
+    const n = catName.toLowerCase();
+    if (n.includes('breakfast') || n.includes('नाश्ता')) return <Sun className="w-4 h-4 text-amber-500" />;
+    if (n.includes('thali') || n.includes('थाली')) return <Award className="w-4 h-4 text-rasoi-gold" />;
+    if (n.includes('lunch') || n.includes('दोपहर')) return <Utensils className="w-4 h-4 text-emerald-600" />;
+    if (n.includes('snack') || n.includes('शाम')) return <Coffee className="w-4 h-4 text-amber-600" />;
+    if (n.includes('dinner') || n.includes('रात्रि')) return <Moon className="w-4 h-4 text-indigo-500" />;
+    if (n.includes('beverage') || n.includes('पेय')) return <GlassWater className="w-4 h-4 text-cyan-500" />;
+    return <Utensils className="w-4 h-4 text-rasoi-green" />;
   };
 
   return (
@@ -43,29 +40,29 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
             onSelectCategory('');
             if (isSpecialFilter) onToggleSpecial();
           }}
-          className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-full font-heading font-semibold text-sm transition-all ${
+          className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-full font-heading font-bold text-xs sm:text-sm transition-all ${
             selectedCategoryId === '' && !isSpecialFilter
               ? 'bg-rasoi-green text-white shadow-md'
-              : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm'
           }`}
         >
-          <span>{t('allDishes')}</span>
+          <span>{lang === 'hi' ? 'सभी व्यंजन' : 'All Dishes'}</span>
         </button>
 
         {/* Today's Special Filter */}
         <button
           onClick={onToggleSpecial}
-          className={`shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full font-heading font-semibold text-sm transition-all ${
+          className={`shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full font-heading font-bold text-xs sm:text-sm transition-all ${
             isSpecialFilter
-              ? 'bg-rasoi-gold text-rasoi-dark font-bold shadow-md'
-              : 'bg-white text-gray-700 hover:bg-rasoi-goldLight border border-gray-200'
+              ? 'bg-rasoi-gold text-rasoi-dark shadow-md ring-2 ring-rasoi-gold/40'
+              : 'bg-white text-gray-700 hover:bg-amber-50 border border-gray-200 shadow-sm'
           }`}
         >
-          <Sparkles className="w-4 h-4 text-rasoi-gold" />
-          <span>{lang === 'hi' ? 'आज का विशेष' : "Today's Special"}</span>
+          <Sparkles className="w-4 h-4 text-rasoi-gold fill-current" />
+          <span>{lang === 'hi' ? 'आज का खास' : "Today's Special"}</span>
         </button>
 
-        {/* Categories from Backend */}
+        {/* Categories from Backend / Database */}
         {categories.map((cat) => {
           const isSelected = selectedCategoryId === cat.id && !isSpecialFilter;
           return (
@@ -75,10 +72,10 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
                 if (isSpecialFilter) onToggleSpecial();
                 onSelectCategory(cat.id);
               }}
-              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-full font-heading font-semibold text-sm transition-all ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-full font-heading font-bold text-xs sm:text-sm transition-all ${
                 isSelected
                   ? 'bg-rasoi-green text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm'
               }`}
             >
               {getIcon(cat.name)}
