@@ -43,8 +43,9 @@ export const Footer: React.FC = () => {
             {!inApp && (
               <div className="pt-2">
                 <a
-                  href="./Neelam-Ki-Gharelu-Rasoi.apk"
-                  download="Neelam-Ki-Gharelu-Rasoi.apk"
+                  href="https://github.com/anything-tech555/neelam-ki-gharelu-rasoi/releases/download/v1.0.1/Neelam-Ki-Gharelu-Rasoi.apk"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rasoi-gold text-rasoi-dark font-bold text-xs hover:bg-white transition-all shadow-sm hover:shadow-md"
                 >
                   <Download className="w-3.5 h-3.5" />

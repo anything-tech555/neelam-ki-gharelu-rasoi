@@ -115,8 +115,9 @@ export const Hero: React.FC = () => {
             {!inApp && (
               <div className="pt-1 flex items-center gap-3">
                 <a
-                  href="./Neelam-Ki-Gharelu-Rasoi.apk"
-                  download="Neelam-Ki-Gharelu-Rasoi.apk"
+                  href="https://github.com/anything-tech555/neelam-ki-gharelu-rasoi/releases/download/v1.0.1/Neelam-Ki-Gharelu-Rasoi.apk"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-rasoi-dark font-bold text-xs sm:text-sm hover:bg-rasoi-gold transition-colors shadow-md group"
                 >
                   <Smartphone className="w-4 h-4 text-rasoi-green group-hover:text-rasoi-dark transition-colors" />
