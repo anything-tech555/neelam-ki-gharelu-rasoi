@@ -31,11 +31,11 @@ A complete, production-ready, full-stack food ordering platform consisting of **
 ---
 
 ## 🌐 Live Hosted Links & Downloads
-- **Public Customer Web App**: [https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/](https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/)
-- **Private Admin Management Dashboard**: [https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/admin/](https://akshat18goyal8-dev.github.io/neelam-ki-gharelu-rasoi/admin/)
-- **Android App Download (APK)**: [Download Neelam-Ki-Gharelu-Rasoi.apk (v1.0.0)](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.apk)
-- **Android App Bundle (AAB)**: [Download Neelam-Ki-Gharelu-Rasoi.aab (v1.0.0)](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.aab)
-- **GitHub Repository**: [https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi](https://github.com/akshat18goyal8-dev/neelam-ki-gharelu-rasoi)
+- **Public Customer Web App**: [https://anything-tech555.github.io/neelam-ki-gharelu-rasoi/](https://anything-tech555.github.io/neelam-ki-gharelu-rasoi/)
+- **Private Admin Management Dashboard**: [https://anything-tech555.github.io/neelam-ki-gharelu-rasoi/admin/](https://anything-tech555.github.io/neelam-ki-gharelu-rasoi/admin/)
+- **Android App Download (APK)**: [Download Neelam-Ki-Gharelu-Rasoi.apk (v1.0.0)](https://github.com/anything-tech555/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.apk)
+- **Android App Bundle (AAB)**: [Download Neelam-Ki-Gharelu-Rasoi.aab (v1.0.0)](https://github.com/anything-tech555/neelam-ki-gharelu-rasoi/releases/download/v1.0.0/Neelam-Ki-Gharelu-Rasoi.aab)
+- **GitHub Repository**: [https://github.com/anything-tech555/neelam-ki-gharelu-rasoi](https://github.com/anything-tech555/neelam-ki-gharelu-rasoi)
 
 ---
 
